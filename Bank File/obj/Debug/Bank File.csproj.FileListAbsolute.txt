@@ -1,0 +1,25 @@
+D:\Bank File\Bank File\bin\Debug\Bank File.exe.config
+D:\Bank File\Bank File\bin\Debug\Bank File.exe
+D:\Bank File\Bank File\bin\Debug\Bank File.pdb
+D:\Bank File\Bank File\bin\Debug\EPPlus.dll
+D:\Bank File\Bank File\bin\Debug\EPPlus.Interfaces.dll
+D:\Bank File\Bank File\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
+D:\Bank File\Bank File\bin\Debug\System.Buffers.dll
+D:\Bank File\Bank File\bin\Debug\System.ComponentModel.Annotations.dll
+D:\Bank File\Bank File\bin\Debug\System.Memory.dll
+D:\Bank File\Bank File\bin\Debug\System.Numerics.Vectors.dll
+D:\Bank File\Bank File\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\Bank File\Bank File\bin\Debug\System.Security.Cryptography.Xml.dll
+D:\Bank File\Bank File\bin\Debug\EPPlus.xml
+D:\Bank File\Bank File\bin\Debug\Microsoft.IO.RecyclableMemoryStream.xml
+D:\Bank File\Bank File\bin\Debug\System.Buffers.xml
+D:\Bank File\Bank File\bin\Debug\System.Memory.xml
+D:\Bank File\Bank File\bin\Debug\System.Numerics.Vectors.xml
+D:\Bank File\Bank File\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\Bank File\Bank File\bin\Debug\System.Security.Cryptography.Xml.xml
+D:\Bank File\Bank File\obj\Debug\Bank File.csproj.AssemblyReference.cache
+D:\Bank File\Bank File\obj\Debug\Bank File.csproj.CoreCompileInputs.cache
+D:\Bank File\Bank File\obj\Debug\Bank File.csproj.Up2Date
+D:\Bank File\Bank File\obj\Debug\Bank File.exe
+D:\Bank File\Bank File\obj\Debug\Bank File.pdb
+D:\Bank File\Bank File\bin\Debug\EPPlus.System.Drawing.dll
