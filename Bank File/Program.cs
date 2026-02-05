@@ -24,34 +24,38 @@ namespace Bank_File
         public static string filePath1 = "";
         private static readonly object _lock = new object();
         private static int _sequence = 0;
-        private static DateTime _lastMinute = DateTime.MinValue;
+        private static DateTime _lastSecond = DateTime.MinValue;
         private static readonly Random _random = new Random();
         private const string Base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         public static string GenerateUTR()
         {
             lock (_lock)
             {
                 DateTime now = DateTime.UtcNow;
-                if (now.ToString("yyMMddHHmm") == _lastMinute.ToString("yyMMddHHmm"))
+
+                if (now.Second == _lastSecond.Second &&
+                    now.Minute == _lastSecond.Minute &&
+                    now.Hour == _lastSecond.Hour &&
+                    now.Day == _lastSecond.Day)
                 {
                     _sequence++;
                 }
                 else
                 {
                     _sequence = 0;
-                    _lastMinute = now;
+                    _lastSecond = now;
                 }
-                // Time part = 10 chars
-                string timePart = now.ToString("yyMMddHHmm");
-                // Base-36 sequence padded to 3 chars
-                string seqPart = ToBase36(_sequence).PadLeft(3, '0');
-                // Random 3 chars
-                string randPart = new string(
-                    Enumerable.Range(0, 3)
-                    .Select(_ => Base36[_random.Next(36)])
-                    .ToArray());
-                // Total = 10 + 3 + 3 = 16
-                return timePart + seqPart + randPart;
+                // Time part: 12 digits
+                string timePart = now.ToString("yyMMddHHmmss");
+                // Sequence part: 2 base36 chars (1296 per second)
+                string seqPart = ToBase36(_sequence).PadLeft(2, '0');
+                // FORCE at least one alphabet
+                char alpha = Letters[_random.Next(Letters.Length)];
+                // Total = 12 + 2 + 1 = 15 → add one more random base36
+                char extra = Base36[_random.Next(Base36.Length)];
+
+                return timePart + seqPart + alpha + extra; // 16 chars
             }
         }
         private static string ToBase36(int value)
@@ -90,7 +94,7 @@ namespace Bank_File
                     int totalColumns = inputWorkSheet.Dimension.End.Column;
                     int totalRows = inputWorkSheet.Dimension.End.Row;
                     for (row = 1; row <= totalRows; row++) 
-                    { 
+                    {
                         for (col = 1; col <= totalColumns; col++)
                         {
                             string temp = inputWorkSheet.Cells[row, col].Text.ToLower();

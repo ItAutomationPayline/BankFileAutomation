@@ -29,8 +29,10 @@ namespace Bank_File
                         sourceRange.Copy(destinationRange);
                         for (int row=2;row<=lastRow;row++) 
                         {
+                            if (Program.ShrinkString(outputWorksheet.Cells[row, 1].Text)!=""|| Program.ShrinkString(outputWorksheet.Cells[row, 3].Text) != ""||Program.ShrinkString(outputWorksheet.Cells[row, 5].Text) != "") { 
                             Console.WriteLine(Program.GenerateUTR());
                             outputWorksheet.Cells[row, transactionCol].Value = Program.GenerateUTR();
+                            }
                         }
                         outputWorksheet.Cells[outputWorksheet.Dimension.Address].AutoFitColumns();
                         string newFileName = Path.Combine(outputFilePath, "Automated Bank File " + Path.GetFileName(filePath));
