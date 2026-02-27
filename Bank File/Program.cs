@@ -28,6 +28,59 @@ namespace Bank_File
         private static readonly Random _random = new Random();
         private const string Base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         private const string Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        public static string GenerateIngenia15DigitUTR(string hrid)
+        {
+            if (string.IsNullOrWhiteSpace(hrid))
+                throw new ArgumentException("HRID cannot be null or empty.");
+
+            hrid = hrid.Trim().ToUpper();
+
+            if (hrid.Length >= 15)
+                throw new ArgumentException("HRID length must be less than 15.");
+
+            lock (_lock)
+            {
+                DateTime now = DateTime.UtcNow;
+
+                if (now.ToString("yyMMddHHmmss") == _lastSecond.ToString("yyMMddHHmmss"))
+                    _sequence++;
+                else
+                {
+                    _sequence = 0;
+                    _lastSecond = now;
+                }
+
+                int remainingLength = 15 - hrid.Length;
+
+                // Time-based uniqueness source
+                string timePart = now.ToString("yyMMddHHmmss");
+
+                // Sequence in base36
+                string seqPart = ToBase36(_sequence);
+
+                // Random alphanumeric buffer
+                string randomPart = new string(
+                    Enumerable.Range(0, 5)
+                    .Select(_ => Base36[_random.Next(Base36.Length)])
+                    .ToArray()
+                );
+
+                string combined = timePart + seqPart + randomPart;
+
+                // Take required remaining length
+                string suffix = combined.Substring(0, remainingLength);
+
+                // Ensure at least one alphabet in suffix
+                if (!suffix.Any(char.IsLetter))
+                {
+                    suffix = suffix.Substring(0, suffix.Length - 1) +
+                             Letters[_random.Next(Letters.Length)];
+                }
+
+                return hrid + suffix;
+            }
+        }
         public static string GenerateUTR()
         {
             lock (_lock)
@@ -56,6 +109,35 @@ namespace Bank_File
                 char extra = Base36[_random.Next(Base36.Length)];
 
                 return timePart + seqPart + alpha + extra; // 16 chars
+            }
+        }
+        public static string Generate15DigitUTR()
+        {
+            lock (_lock)
+            {
+                DateTime now = DateTime.UtcNow;
+
+                if (now.Second == _lastSecond.Second &&
+                    now.Minute == _lastSecond.Minute &&
+                    now.Hour == _lastSecond.Hour &&
+                    now.Day == _lastSecond.Day)
+                {
+                    _sequence++;
+                }
+                else
+                {
+                    _sequence = 0;
+                    _lastSecond = now;
+                }
+                // Time part: 12 digits
+                string timePart = now.ToString("yyMMddHHmmss");
+                // Sequence part: 2 base36 chars (1296 per second)
+                string seqPart = ToBase36(_sequence).PadLeft(2, '0');
+                // FORCE at least one alphabet
+                char alpha = Letters[_random.Next(Letters.Length)];
+                // Total = 12 + 2 + 1 = 15 → add one more random base36
+
+                return timePart + seqPart + alpha; // 16 chars
             }
         }
         private static string ToBase36(int value)
@@ -161,7 +243,7 @@ namespace Bank_File
             Console.WriteLine("After pasting Bank file, Press Enter to start processing.");
             Console.ReadLine();
 
-            var inputFile = Directory.GetFiles(sourceFolder + "Input", "*.xlsx")
+            var inputFile = Directory.GetFiles(sourceFolder + "Input", "*.xls*")
                 .OrderByDescending(f => new FileInfo(f).CreationTime).ToList();
 
             if (inputFile.Count == 0)
@@ -180,7 +262,12 @@ namespace Bank_File
             {
                 ForeFlight.BankFile_Automation(filePath1, outputFilePath);
             }
+            if (filePath1.ToLower().Contains("ingenia"))
+            {
+                Ingenia.BankFile_Automation(filePath1, outputFilePath);
+            }
             Console.WriteLine("Processing completed. Output file generated.");
+            Console.ReadLine();
         }
         public static void Log(string message)
         {
