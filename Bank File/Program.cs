@@ -81,6 +81,62 @@ namespace Bank_File
                 return hrid + suffix;
             }
         }
+        //15digit random non repeat logic.
+        //public static string GenerateIngenia15DigitBatchRefNo(string hrid)
+        //{
+        //    if (string.IsNullOrWhiteSpace(hrid))
+        //        throw new ArgumentException("Batch ref no cannot be null or empty.");
+        
+        //    hrid = hrid.Trim().ToUpper();
+
+        //    if (hrid.Length >= 15)
+        //        throw new ArgumentException("HRID length must be less than 15.");
+
+        //    lock (_lock)
+        //    {
+        //        int remainingLength = 15 - hrid.Length;
+
+        //        // Generate random alphanumeric suffix
+        //        char[] suffixChars = new char[remainingLength];
+
+        //        for (int i = 0; i < remainingLength; i++)
+        //        {
+        //            suffixChars[i] = Base36[_random.Next(Base36.Length)];
+        //        }
+
+        //        string suffix = new string(suffixChars);
+
+        //        // Ensure at least one alphabet character exists in suffix
+        //        if (!suffix.Any(char.IsLetter))
+        //        {
+        //            int replaceIndex = _random.Next(remainingLength);
+        //            suffixChars[replaceIndex] = Letters[_random.Next(Letters.Length)];
+        //            suffix = new string(suffixChars);
+        //        }
+
+        //        return hrid + suffix;
+        //    }
+        //}
+        public static string GenerateIngenia15DigitBatchRefNo(string hrid)
+        {
+            if (string.IsNullOrWhiteSpace(hrid))
+                throw new ArgumentException("Batchewf no cannot be null or empty.");
+
+            hrid = hrid.Trim();
+
+            // Ensure exactly 10 digits
+            if (hrid.Length != 10)
+                throw new ArgumentException("HRID must be exactly 10 digits.");
+
+            lock (_lock)
+            {
+                DateTime now = DateTime.UtcNow;
+
+                string timePart = now.ToString("dHHmm"); // Day + Hour + Minute (5 digits)
+
+                return hrid + timePart; // Total length = 15
+            }
+        }
         public static string GenerateUTR()
         {
             lock (_lock)
