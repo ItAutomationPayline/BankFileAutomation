@@ -3,16 +3,32 @@
   "WorkspaceRootPath": "D:\\Bank File\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|d:\\bank file\\bank file\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|D:\\Bank File\\bank file\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|solutionrelative:bank file\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|D:\\Bank File\\bank file\\integral.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|solutionrelative:bank file\\integral.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|d:\\bank file\\bank file\\foreflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|solutionrelative:bank file\\foreflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|D:\\Bank File\\bank file\\logichub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|solutionrelative:bank file\\logichub.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|D:\\Bank File\\bank file\\assent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|solutionrelative:bank file\\assent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|D:\\Bank File\\bank file\\gh_induction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|solutionrelative:bank file\\gh_induction.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|D:\\Bank File\\bank file\\ingenia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|solutionrelative:bank file\\ingenia.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|D:\\Bank File\\bank file\\foreflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|solutionrelative:bank file\\foreflight.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A294EDB5-2A60-404C-A0E9-B70D024752B8}|Bank File\\Bank File.csproj|D:\\Bank File\\bank file\\synchronoss.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,17 +42,70 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 8,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Integral.cs",
+              "DocumentMoniker": "D:\\Bank File\\Bank File\\Integral.cs",
+              "RelativeDocumentMoniker": "Bank File\\Integral.cs",
+              "ToolTip": "D:\\Bank File\\Bank File\\Integral.cs",
+              "RelativeToolTip": "Bank File\\Integral.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACcAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-12T07:22:29.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "GH_Induction.cs",
+              "DocumentMoniker": "D:\\Bank File\\Bank File\\GH_Induction.cs",
+              "RelativeDocumentMoniker": "Bank File\\GH_Induction.cs",
+              "ToolTip": "D:\\Bank File\\Bank File\\GH_Induction.cs",
+              "RelativeToolTip": "Bank File\\GH_Induction.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABAAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T10:57:42.69Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LogicHub.cs",
+              "DocumentMoniker": "D:\\Bank File\\Bank File\\LogicHub.cs",
+              "RelativeDocumentMoniker": "Bank File\\LogicHub.cs",
+              "ToolTip": "D:\\Bank File\\Bank File\\LogicHub.cs",
+              "RelativeToolTip": "Bank File\\LogicHub.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-28T06:11:16.245Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Assent.cs",
+              "DocumentMoniker": "D:\\Bank File\\Bank File\\Assent.cs",
+              "RelativeDocumentMoniker": "Bank File\\Assent.cs",
+              "ToolTip": "D:\\Bank File\\Bank File\\Assent.cs",
+              "RelativeToolTip": "Bank File\\Assent.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAAAAsAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-27T12:08:03.011Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Ingenia.cs",
               "DocumentMoniker": "D:\\Bank File\\Bank File\\Ingenia.cs",
               "RelativeDocumentMoniker": "Bank File\\Ingenia.cs",
               "ToolTip": "D:\\Bank File\\Bank File\\Ingenia.cs",
               "RelativeToolTip": "Bank File\\Ingenia.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAcwCcAAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-02-18T09:39:33.546Z"
             },
@@ -48,13 +117,14 @@
               "RelativeDocumentMoniker": "Bank File\\ForeFlight.cs",
               "ToolTip": "D:\\Bank File\\Bank File\\ForeFlight.cs",
               "RelativeToolTip": "Bank File\\ForeFlight.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAgwBIAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-01-19T06:56:41.232Z"
+              "WhenOpened": "2026-01-19T06:56:41.232Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 7,
               "Title": "Synchronoss.cs",
               "DocumentMoniker": "D:\\Bank File\\Bank File\\Synchronoss.cs",
               "RelativeDocumentMoniker": "Bank File\\Synchronoss.cs",
@@ -72,7 +142,7 @@
               "RelativeDocumentMoniker": "Bank File\\Program.cs",
               "ToolTip": "D:\\Bank File\\Bank File\\Program.cs",
               "RelativeToolTip": "Bank File\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAFIBAAAAAAAAAAASwFUBAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-06-02T06:07:36.312Z",
               "EditorCaption": ""

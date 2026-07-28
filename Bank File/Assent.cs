@@ -8,7 +8,7 @@ using OfficeOpenXml;
 
 namespace Bank_File
 {
-    public class Ingenia
+    public class Assent
     {
         public static void BankFile_Automation(string filePath, string outputFilePath)
         {
@@ -20,31 +20,39 @@ namespace Bank_File
                     var inputWorkSheet = package.Workbook.Worksheets[0]; // Get the input worksheet
                     int lastRow = inputWorkSheet.Dimension.End.Row;
                     int lastCol = inputWorkSheet.Dimension.End.Column;
-                    int hridCol= Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Employee Number");
-                    int transactionCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Reference Number");
-                    int batchrefno= Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Batch Ref no");
-                    int narration = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Narration");
+                    //int transactionCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Transaction Reference");
                     using (var outputPackage = new ExcelPackage())
                     {
-                        var outputWorksheet = outputPackage.Workbook.Worksheets.Add("Bank File");
+                        var outputWorksheet = outputPackage.Workbook.Worksheets.Add(inputWorkSheet.ToString());
                         var sourceRange = inputWorkSheet.Cells[1, 1, lastRow, lastCol];
                         var destinationRange = outputWorksheet.Cells[1, 1, lastRow, lastCol];
                         sourceRange.Copy(destinationRange);
-                        string batchref = (outputWorksheet.Cells[3, batchrefno].Text).ToLower().Replace("salary ", "SAL").Replace(" ", "");
-                        string batchrefcalculated15digit= Program.GenerateIngenia15DigitBatchRefNo(batchref);
+                        int RecordTypeCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Record Type");
+                        int amountCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Payment amount");
+                        int paymentTypeCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Payment Type");
+                        int processingModeCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Processing Mode");
+                        int totalCount = 0;
+                        double totalAmount = 0;
+                        outputWorksheet.InsertRow(2, 1);
+                        outputWorksheet.Cells[2, RecordTypeCol].Value = "H";
+                        outputWorksheet.Cells[2, paymentTypeCol].Value = "P";
+                        lastRow = outputWorksheet.Dimension.End.Row;
                         for (int row = 2; row <= lastRow; row++)
                         {
-                            if (Program.ShrinkString(outputWorksheet.Cells[row, 1].Text) != "" || Program.ShrinkString(outputWorksheet.Cells[row, 3].Text) != "" || Program.ShrinkString(outputWorksheet.Cells[row, 5].Text) != "")
+                            if (Program.ShrinkString(outputWorksheet.Cells[row, RecordTypeCol].Text) == "p") 
                             {
-                                outputWorksheet.Cells[row, transactionCol].Value = Program.GenerateIngenia15DigitUTR(outputWorksheet.Cells[row, hridCol].Text);
-                                outputWorksheet.Cells[row, batchrefno].Value= batchrefcalculated15digit;
+                                totalCount++;
+                                totalAmount += outputWorksheet.Cells[row, amountCol].GetValue<double>();
+                            }
+                            if (Program.ShrinkString(outputWorksheet.Cells[row, RecordTypeCol].Text) == "")
+                            {
+                                outputWorksheet.Cells[row, RecordTypeCol].Value = "T";
+                                outputWorksheet.Cells[row, paymentTypeCol].Value = totalCount;
+                                outputWorksheet.Cells[row, processingModeCol].Value = totalAmount;
                             }
                         }
                         outputWorksheet.Cells[outputWorksheet.Dimension.Address].AutoFitColumns();
-                        outputWorksheet.DeleteColumn(hridCol);
                         string newFileName = Path.Combine(outputFilePath, "Automated Bank File " + Path.GetFileName(filePath));
-                        //newFileName = newFileName.Replace(".xls",".csv");
-                        //newFileName = newFileName.Replace(".xlsx", ".csv");
                         FileInfo newFileInfo = new FileInfo(newFileName);
                         outputPackage.SaveAs(newFileInfo);
                         outputPackage.SaveAsAsync(new FileInfo(outputFilePath));

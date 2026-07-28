@@ -27,7 +27,7 @@ namespace Bank_File
         private static DateTime _lastSecond = DateTime.MinValue;
         private static readonly Random _random = new Random();
         private const string Base36 = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        private const string Letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private const string Letters = "ABCDFGHIJKLMNOPQRSTUVWXYZ";//E is removed
 
         public static string GenerateIngenia15DigitUTR(string hrid)
         {
@@ -134,7 +134,15 @@ namespace Bank_File
 
                 string timePart = now.ToString("dHHmm"); // Day + Hour + Minute (5 digits)
 
-                return hrid + timePart; // Total length = 15
+                string result = (hrid + timePart).ToUpper();
+
+                // Ensure max length = 15
+                if (result.Length > 15)
+                {
+                    result = result.Substring(0, 15);
+                }
+
+                return result; // Total length = 15
             }
         }
         public static string GenerateUTR()
@@ -163,7 +171,7 @@ namespace Bank_File
                 char alpha = Letters[_random.Next(Letters.Length)];
                 // Total = 12 + 2 + 1 = 15 → add one more random base36
                 char extra = Base36[_random.Next(Base36.Length)];
-
+                Console.WriteLine(timePart + seqPart + alpha + extra);
                 return timePart + seqPart + alpha + extra; // 16 chars
             }
         }
@@ -296,7 +304,7 @@ namespace Bank_File
         }
         public static void Main(string[] args)
         {
-            Console.WriteLine("After pasting Bank file, Press Enter to start processing.");
+            Console.WriteLine("After pasting Bank file with correct name, Press Enter to start processing.");
             Console.ReadLine();
 
             var inputFile = Directory.GetFiles(sourceFolder + "Input", "*.xls*")
@@ -321,6 +329,26 @@ namespace Bank_File
             if (filePath1.ToLower().Contains("ingenia"))
             {
                 Ingenia.BankFile_Automation(filePath1, outputFilePath);
+            }
+            if (filePath1.ToLower().Contains("assent"))
+            {
+                Assent.BankFile_Automation(filePath1, outputFilePath);
+            }
+            if (filePath1.ToLower().Contains("logichub")|| filePath1.ToLower().Contains("devo"))
+            {
+                LogicHub.BankFile_Automation(filePath1, outputFilePath);
+            }
+            if (filePath1.ToLower().Contains("gh induction"))
+            {
+                GH_Induction.BankFile_Automation(filePath1, outputFilePath);
+            }
+            if (filePath1.ToLower().Contains("ias")|| filePath1.ToLower().Contains("integral"))
+            {
+                Integral.BankFile_Automation(filePath1, outputFilePath);
+            }
+            if (filePath1.ToLower().Contains("sycomp"))
+            {
+                Sycomp.BankFile_Automation(filePath1, outputFilePath);
             }
             Console.WriteLine("Processing completed. Output file generated.");
             Console.ReadLine();

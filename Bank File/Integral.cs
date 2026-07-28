@@ -8,7 +8,7 @@ using OfficeOpenXml;
 
 namespace Bank_File
 {
-    public class Ingenia
+    public class Integral
     {
         public static void BankFile_Automation(string filePath, string outputFilePath)
         {
@@ -20,31 +20,36 @@ namespace Bank_File
                     var inputWorkSheet = package.Workbook.Worksheets[0]; // Get the input worksheet
                     int lastRow = inputWorkSheet.Dimension.End.Row;
                     int lastCol = inputWorkSheet.Dimension.End.Column;
-                    int hridCol= Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Employee Number");
-                    int transactionCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Reference Number");
-                    int batchrefno= Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Batch Ref no");
-                    int narration = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Narration");
+                    
+                    int adddetailsCol= Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Add Details 5");
+                    int remarksCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "remark");
+                    int dateCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Date");
+                    int beneficiaryNameCol = Program.getColumnNumber(filePath, inputWorkSheet.ToString(), "Beneficiary Name");
                     using (var outputPackage = new ExcelPackage())
                     {
-                        var outputWorksheet = outputPackage.Workbook.Worksheets.Add("Bank File");
+                        var outputWorksheet = outputPackage.Workbook.Worksheets.Add(inputWorkSheet.ToString());
                         var sourceRange = inputWorkSheet.Cells[1, 1, lastRow, lastCol];
                         var destinationRange = outputWorksheet.Cells[1, 1, lastRow, lastCol];
                         sourceRange.Copy(destinationRange);
-                        string batchref = (outputWorksheet.Cells[3, batchrefno].Text).ToLower().Replace("salary ", "SAL").Replace(" ", "");
-                        string batchrefcalculated15digit= Program.GenerateIngenia15DigitBatchRefNo(batchref);
                         for (int row = 2; row <= lastRow; row++)
                         {
-                            if (Program.ShrinkString(outputWorksheet.Cells[row, 1].Text) != "" || Program.ShrinkString(outputWorksheet.Cells[row, 3].Text) != "" || Program.ShrinkString(outputWorksheet.Cells[row, 5].Text) != "")
+                            if (Program.ShrinkString(outputWorksheet.Cells[row, dateCol].Text) != "") { 
+                            string dateText = outputWorksheet.Cells[row, dateCol].Text;
+                            if (DateTime.TryParseExact(dateText, "dd-MM-yyyy",System.Globalization.CultureInfo.InvariantCulture,
+                                System.Globalization.DateTimeStyles.None, out DateTime parsedDate))
                             {
-                                outputWorksheet.Cells[row, transactionCol].Value = Program.GenerateIngenia15DigitUTR(outputWorksheet.Cells[row, hridCol].Text);
-                                outputWorksheet.Cells[row, batchrefno].Value= batchrefcalculated15digit;
+                                outputWorksheet.Cells[row, adddetailsCol].Value = parsedDate.ToString("MMMM yyyy");
+                            }
+                            else
+                            {
+                                outputWorksheet.Cells[row, adddetailsCol].Value = ""; // or handle invalid format
+                            }
+                            outputWorksheet.Cells[row, adddetailsCol].Value = outputWorksheet.Cells[row, adddetailsCol].Text + " " + outputWorksheet.Cells[row, beneficiaryNameCol].Text;
+                            outputWorksheet.Cells[row, remarksCol].Value = "IAS India " + parsedDate.ToString("MMMM yyyy") + " Salary";
                             }
                         }
                         outputWorksheet.Cells[outputWorksheet.Dimension.Address].AutoFitColumns();
-                        outputWorksheet.DeleteColumn(hridCol);
                         string newFileName = Path.Combine(outputFilePath, "Automated Bank File " + Path.GetFileName(filePath));
-                        //newFileName = newFileName.Replace(".xls",".csv");
-                        //newFileName = newFileName.Replace(".xlsx", ".csv");
                         FileInfo newFileInfo = new FileInfo(newFileName);
                         outputPackage.SaveAs(newFileInfo);
                         outputPackage.SaveAsAsync(new FileInfo(outputFilePath));
