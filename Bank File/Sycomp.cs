@@ -55,6 +55,8 @@ namespace Bank_File
                         {
                             outputWorksheet.Cells[row, transactionTypeCol].Value = "NEFT";
                         }
+                        if (outputWorksheet.Cells[row, 2].Text.Replace(" ","")!="") 
+                        { outputWorksheet.Cells[row, 10].Value = "Sycomp – Salary – " + DateTime.Now.ToString("MMMM yyyy"); }
                     }
 
                     outputWorksheet.Cells.AutoFitColumns();
